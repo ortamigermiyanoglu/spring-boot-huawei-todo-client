@@ -2,6 +2,7 @@ package com.huawei.todoclient.service;
 
 import com.huawei.todoclient.model.JwtRequest;
 import com.huawei.todoclient.model.JwtResponse;
+import com.huawei.todoclient.model.User;
 import com.huawei.todoclient.model.UserRegister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,16 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 public class UserServiceImpl implements UserService{
-    private static final String restURI  = "http://localhost:8082/api/v1/users/";
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final String restURI;
+    private RestTemplate restTemplate;
+
+
+    public UserServiceImpl(RestTemplate restTemplate) {
+        this.restURI = "http://localhost:8082/api/v1/users/";
+        this.restTemplate = restTemplate;
+    }
+
 
 
     @Override
@@ -29,4 +37,11 @@ public class UserServiceImpl implements UserService{
     public ResponseEntity<JwtResponse> authenticate(JwtRequest jwtRequest) {
         return restTemplate.postForEntity(restURI+"authenticate", jwtRequest, JwtResponse.class);
     }
+
+    @Override
+    public ResponseEntity<User> findByUsername(String username) {
+        return restTemplate.getForEntity(restURI+username,User.class);
+    }
+
+
 }

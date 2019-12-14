@@ -1,6 +1,8 @@
 package com.huawei.todoclient.controller;
 
 import com.huawei.todoclient.model.JwtRequest;
+import com.huawei.todoclient.model.JwtResponse;
+import com.huawei.todoclient.model.User;
 import com.huawei.todoclient.model.UserRegister;
 import com.huawei.todoclient.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
  * @since 12/14/2019, Sat
  */
 @Controller
-@RequestMapping({"user/"})
 public class UserController {
+
+    public static String loggedUserName;
 
     private final UserService userService;
 
@@ -23,21 +26,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping({"register"})
+    @RequestMapping({"/user/register", ""})
     public String showRegister(Model model){
         UserRegister userRegister = new UserRegister();
         model.addAttribute("user", userRegister);
         return "user/register";
     }
 
-    @PostMapping({"save"})
+    @PostMapping({"/user/save"})
     public String showRegister(@ModelAttribute("user") UserRegister user, Model model){
         ResponseEntity<UserRegister> savedUser = userService.saveUser(user);
         System.out.println(savedUser.getBody());
-        return "user/test";
+        return "test";
     }
 
-    @GetMapping({"login"})
+    @GetMapping({"/user/login"})
     public String showLogin(Model model){
         JwtRequest jwtRequest = new JwtRequest();
         model.addAttribute("userLogin", jwtRequest);
@@ -45,11 +48,18 @@ public class UserController {
     }
 
 
-    @PostMapping({"authenticate"})
+    @PostMapping({"/user/authenticate"})
     public String showRegister(@ModelAttribute("userLogin") JwtRequest userLogin, Model model){
-        System.out.println(userLogin);
-        System.out.println(userService.authenticate(userLogin).getBody());
-        return "user/test";
+        loggedUserName = userLogin.getUsername();
+        JwtResponse jwtResponse = userService.authenticate(userLogin).getBody();
+
+        System.out.println(jwtResponse);
+
+//        Integer id = userService.findByUsername(loggedUserName).getBody().getId();
+//        if (jwtResponse!=null){
+//            return "redirect:/user/"+id+"/tasks";
+//        }
+        return "test";
     }
 
 

@@ -2,6 +2,7 @@ package com.huawei.todoclient.service;
 
 import com.huawei.todoclient.model.JwtRequest;
 import com.huawei.todoclient.model.JwtResponse;
+import com.huawei.todoclient.model.User;
 import com.huawei.todoclient.model.UserRegister;
 import org.springframework.http.ResponseEntity;
 
@@ -13,5 +14,6 @@ import org.springframework.http.ResponseEntity;
 public interface UserService {
     ResponseEntity<UserRegister> saveUser(UserRegister userRegister);
     ResponseEntity<JwtResponse> authenticate(JwtRequest jwtRequest);
+    ResponseEntity<User> findByUsername(String username);
 
 }

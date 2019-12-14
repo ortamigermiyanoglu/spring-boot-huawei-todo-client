@@ -1,11 +1,18 @@
 package com.huawei.todoclient.model;
 
+import lombok.*;
+
 /**
  * @author sumutella
  * @time 10:00 AM
  * @since 12/14/2019, Sat
  */
-public class UserGet extends BaseEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class User extends BaseEntity {
     private String username;
     private String fullName;
 }
