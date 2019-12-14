@@ -14,18 +14,17 @@
         <div class="panel panel-primary">
             <div class="panel-heading">User Registration</div>
             <div class="panel-body">
-                <form action="#" th:action="@{/user/save}"
-                      th:object="${user}" method="POST">
+                <form th:action="@{/user/save}" th:object="${user}" method="POST">
 
-                    <input type="text" th:field="*{username}" style="margin-top: 10px"
+                    <input type="text" th:field="*{username}" style="margin-bottom: 25px"
                            class="form-control mb-4 col-4" placeholder="username">
 
-                    <input type="password" th:field="*{password}" style="margin-top: 10px"
+                    <input type="password" th:field="*{password}" style="margin-bottom: 25px"
                            class="form-control mb-4 col-4" placeholder="password">
-                    <input type="text" th:field="*{fullName}" style="margin-top: 10px"
+                    <input type="text" th:field="*{fullName}" style="margin-bottom: 25px"
                            class="form-control mb-4 col-4" placeholder="full name">
 
-                    <button type="submit" style="margin-top: 10px" class="btn btn-info col-2">Register</button>
+                    <button type="submit" class="btn btn-primary col-2">Register</button>
 
                 </form>
 

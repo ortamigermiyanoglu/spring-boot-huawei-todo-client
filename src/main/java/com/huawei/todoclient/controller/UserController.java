@@ -1,14 +1,12 @@
 package com.huawei.todoclient.controller;
 
+import com.huawei.todoclient.model.JwtRequest;
 import com.huawei.todoclient.model.UserRegister;
 import com.huawei.todoclient.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author sumutella
@@ -38,6 +36,22 @@ public class UserController {
         System.out.println(savedUser.getBody());
         return "user/test";
     }
+
+    @GetMapping({"login"})
+    public String showLogin(Model model){
+        JwtRequest jwtRequest = new JwtRequest();
+        model.addAttribute("userLogin", jwtRequest);
+        return "user/login";
+    }
+
+
+    @PostMapping({"authenticate"})
+    public String showRegister(@ModelAttribute("userLogin") JwtRequest userLogin, Model model){
+        System.out.println(userLogin);
+        System.out.println(userService.authenticate(userLogin).getBody());
+        return "user/test";
+    }
+
 
 
 }
