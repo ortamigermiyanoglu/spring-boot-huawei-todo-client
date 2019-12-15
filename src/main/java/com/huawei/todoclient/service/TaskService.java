@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface TaskService {
     List<Task> showAllTasks(Integer id);
+    Task saveTask(Task task);
 }

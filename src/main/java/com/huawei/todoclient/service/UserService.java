@@ -15,5 +15,7 @@ public interface UserService {
     ResponseEntity<UserRegister> saveUser(UserRegister userRegister);
     ResponseEntity<JwtResponse> authenticate(JwtRequest jwtRequest);
     ResponseEntity<User> findByUsername(String username);
+    ResponseEntity<User> findById(Integer userId);
+
 
 }

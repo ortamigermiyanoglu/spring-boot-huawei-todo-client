@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     public static String loggedUserName;
+    public static String myToken;
 
     private final UserService userService;
 
@@ -47,18 +48,13 @@ public class UserController {
         return "user/login";
     }
 
-
     @PostMapping({"/user/authenticate"})
     public String showRegister(@ModelAttribute("userLogin") JwtRequest userLogin, Model model){
+        myToken = userService.authenticate(userLogin).getBody().getToken();
         loggedUserName = userLogin.getUsername();
-        JwtResponse jwtResponse = userService.authenticate(userLogin).getBody();
+        if (myToken!=null && !myToken.isEmpty()){
 
-        System.out.println(jwtResponse);
-
-//        Integer id = userService.findByUsername(loggedUserName).getBody().getId();
-//        if (jwtResponse!=null){
-//            return "redirect:/user/"+id+"/tasks";
-//        }
+        }
         return "test";
     }
 

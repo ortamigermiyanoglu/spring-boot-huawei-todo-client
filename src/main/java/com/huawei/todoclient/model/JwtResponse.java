@@ -1,5 +1,6 @@
 package com.huawei.todoclient.model;
 
+
 import java.io.Serializable;
 
 /**
@@ -8,20 +9,22 @@ import java.io.Serializable;
  * @since 12/14/2019, Sat
  */
 public class JwtResponse implements Serializable {
-    private String jwttoken;
+    private String token;
+    private static final long serialVersionUID = -8091879091924046844L;
+
 
     public JwtResponse() {
     }
 
-    public JwtResponse(String jwttoken) {
-        this.jwttoken = jwttoken;
+    public JwtResponse(String token) {
+        this.token = token;
     }
 
-    public String getJwttoken() {
-        return jwttoken;
+    public String getToken() {
+        return token;
     }
 
-    public void setJwttoken(String jwttoken) {
-        this.jwttoken = jwttoken;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
