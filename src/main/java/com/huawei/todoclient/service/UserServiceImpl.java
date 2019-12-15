@@ -1,13 +1,15 @@
 package com.huawei.todoclient.service;
 
+import com.huawei.todoclient.controller.UserController;
 import com.huawei.todoclient.model.JwtRequest;
 import com.huawei.todoclient.model.JwtResponse;
 import com.huawei.todoclient.model.User;
 import com.huawei.todoclient.model.UserRegister;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 
 /**
  * @author sumutella
@@ -35,7 +37,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResponseEntity<User> findByUsername(String username) {
-        return restTemplate.getForEntity(restURI+username,User.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+UserController.myToken);
+        return restTemplate.exchange(restURI+username, HttpMethod.GET, new HttpEntity<>(headers), User.class);
+
     }
 
     @Override

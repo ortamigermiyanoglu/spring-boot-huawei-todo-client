@@ -53,7 +53,7 @@ public class UserController {
         myToken = userService.authenticate(userLogin).getBody().getToken();
         loggedUserName = userLogin.getUsername();
         if (myToken!=null && !myToken.isEmpty()){
-
+            System.out.println(userService.findByUsername(userLogin.getUsername()));
         }
         return "test";
     }
